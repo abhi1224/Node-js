@@ -58,3 +58,41 @@ export const addUserController = async(req, res) => {
     }
 } 
 
+export const getUserByIdController = async(req, res) => {
+    try {
+        const userId = req.params.id
+        console.log(userId);
+        
+        const user = await User.findById(userId)
+        console.log(user);
+        
+        if(!user){
+            return res.status(404).json({
+                success: false, 
+                statusCode: 404,
+                message: 'User not found'
+            })
+        }
+        return res.status(200).json({
+            susccess: true,
+            statusCode: 200,
+            message: 'Fetched user data successfully',
+            user
+        })
+    } catch (error) {
+        if(error.name === 'CastError'){
+            return res.status(400).json({
+                success: false, 
+                statusCode: 400,
+                message: 'Invaild user Id'
+            })
+        }
+        return res.status(500).json({
+            success: false,
+            statusCode: 500,
+            message: 'Something went wrong while fetching user',
+            error: error.message
+        })
+    }
+    
+}
