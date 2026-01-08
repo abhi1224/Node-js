@@ -1,7 +1,8 @@
 import 'dotenv/config'
 import express from 'express'
 import mongoose from 'mongoose'
-import connectDB from './config/db'
+import connectDB from './config/db.js'
+import userRoute from './routes/userRoute.js'
 
 const app = express()
 app.use(express.json())
