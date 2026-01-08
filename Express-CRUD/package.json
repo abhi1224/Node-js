@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A project about learning CRUD operation in database using express js",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "start": "nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
