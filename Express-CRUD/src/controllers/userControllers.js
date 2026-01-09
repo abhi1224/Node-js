@@ -140,3 +140,42 @@ export const updateUserByIdController = async (req, res) => {
         })
     }
 }
+
+export const deleteUserByIdController = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        if (!userId) {
+            return res.status(400).json({
+                success: false,
+                statusCode: 400,
+                message: "User id is required"
+            });
+        }
+
+        const user = await User.findByIdAndDelete(userId);
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                statusCode: 404,
+                message: "User not found"
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            statusCode: 200,
+            message: "User deleted successfully",
+            user
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            statusCode: 500,
+            message: "Something went wrong",
+            error: error.message
+        });
+    }
+};
